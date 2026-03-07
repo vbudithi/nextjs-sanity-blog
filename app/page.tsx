@@ -22,7 +22,7 @@ export default async function Home() {
   const data: simpleBlogCard[] = await getDate();
   console.log(data);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 gap-6 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl  mx-auto py-16 px-4 ">
       {data.map((post, idx) => (
         <BlogCard key={idx} post={post} />
       ))}

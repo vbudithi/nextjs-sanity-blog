@@ -159,6 +159,10 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+.nav-link {
+  @apply text-sm text-black dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
