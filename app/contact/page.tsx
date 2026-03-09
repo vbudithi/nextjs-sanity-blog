@@ -1,7 +1,7 @@
 export default function ContactPage() {
     return (
-        <main className="max-w-3xl mx-auto py-16 px-4">
-            <h1 className="text-4xl font-bold mb-6">
+        <div className="max-w-3xl mx-auto py-16 px-4 text-center">
+            <h1 className="text-4xl font-bold mb-6 ">
                 Contact <span className="text-green-600 dark:text-green-400">Me</span>
             </h1>
 
@@ -66,6 +66,6 @@ export default function ContactPage() {
                     Send Message
                 </button>
             </form>
-        </main>
+        </div>
     );
 }
