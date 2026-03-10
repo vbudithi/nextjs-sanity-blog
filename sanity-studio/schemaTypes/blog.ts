@@ -13,13 +13,23 @@ export default {
             title: 'Slug',
             type: 'slug',
             options: {
-                source: 'title'
+                source: 'title',
+                maxLength: 96
             }
         },
         {
             name: 'titleImage',
             title: 'Title Image',
-            type: 'image'
+            type: 'image',
+            options: {
+                hotspot: true
+            }
+        },
+        {
+            name: 'content',
+            title: 'Content',
+            type: 'array',
+            of: [{ type: 'block' }]
         },
         {
             name: 'smallDescription',
@@ -27,14 +37,11 @@ export default {
             type: 'text'
         },
         {
-            name: 'content',
-            title: 'Content',
-            type: 'array',
-            of: [
-                {
-                    type: 'block'
-                }
-            ]
-        }
+            name: 'publishedAt',
+            title: 'Published At',
+            type: 'datetime',
+            initialValue: () => new Date().toISOString()
+        },
+
     ]
 }

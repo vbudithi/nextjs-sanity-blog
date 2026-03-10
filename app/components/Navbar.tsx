@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
     return (
-        <nav className="w-full relative flex items-center justify-between max-w-5xl mx-auto py-3 pt-6 mb-6">
+        <nav className="w-full relative flex items-center justify-between max-w-5xl mx-auto  pt-6 ">
             <div className="flex items-center ">
                 <Link href="/" className="font-bold text-xl">
                     Viv<span className="text-green-600 dark:text-green-400">Byte</span>
@@ -24,7 +24,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                    href="/allPosts"
+                    href="/"
                     className="nav-link"
                 >
                     All Posts

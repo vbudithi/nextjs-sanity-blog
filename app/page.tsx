@@ -1,30 +1,19 @@
 import { sanityClient, urlFor } from "@/lib/sanity";
 import { simpleBlogCard } from "@/lib/interface";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 import BlogCard from "./components/BlogCard";
+import { BLOG_QUERY } from "@/lib/queries";
 
 
-async function getDate() {
-  const query = `*[_type == "blog"] | order(_createdAt desc) {
-    title,
-      smallDescription,
-      "currentSlug": slug.current,
-      titleImage
-  }
-`;
-
-  const data = await sanityClient.fetch(query);
-  return data;
-
+async function getBlogs() {
+  return await sanityClient.fetch(BLOG_QUERY);
 }
 export default async function Home() {
-  const data: simpleBlogCard[] = await getDate();
+  const data: simpleBlogCard[] = await getBlogs();
   console.log(data);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl  mx-auto py-16 px-4 ">
-      {data.map((post, idx) => (
-        <BlogCard key={idx} post={post} />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl  mx-auto px-4 ">
+      {data.map((post) => (
+        <BlogCard key={post.currentSlug} post={post} />
       ))}
     </div>
   );
