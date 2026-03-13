@@ -3,7 +3,6 @@ import { simpleBlogCard } from "@/lib/interface";
 import BlogCard from "./components/BlogCard";
 import { BLOG_QUERY } from "@/lib/queries";
 
-
 async function getBlogs() {
   return await sanityClient.fetch(BLOG_QUERY);
 }

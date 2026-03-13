@@ -3,6 +3,11 @@ export interface simpleBlogCard {
     smallDescription: string,
     currentSlug: string,
     titleImage: any,
-    publishedAt: string
-
+    publishedAt: string,
+    tags?: {
+        title: string;
+        slug: {
+            current: string;
+        };
+    }[];
 }

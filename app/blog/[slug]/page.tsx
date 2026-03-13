@@ -5,6 +5,7 @@ import ExploreButton from "@/app/components/ExploreButton";
 import { PortableText } from "next-sanity";
 import { formatDate } from "@/lib/formatDate";
 import CommentSection from "@/app/components/commentSection";
+import { BLOG_BY_SLUG_QUERY } from "@/lib/queries";
 
 interface BlogPageProps {
     params: Promise<{
@@ -13,26 +14,21 @@ interface BlogPageProps {
 }
 
 async function getBlogPost(slug: string) {
-    const query = `*[_type == "blog" && slug.current == "${slug}"][0]{
-    title,
-    content,
-    titleImage,
-    publishedAt,
-    smallDescription,
-    "comments": *[_type == "comment" && post._ref == ^._id && approved == true]{
-      _id,
-      name,
-      comment,
-      createdAt
-    }
-  }`;
-
-    return await sanityClient.fetch(query);
+    return await sanityClient.fetch(BLOG_BY_SLUG_QUERY, { slug });
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const { slug } = await params;
     const post = await getBlogPost(slug);
+
+
+    const tagColors = [
+        "bg-blue-500/20 text-blue-400",
+        "bg-purple-500/20 text-purple-400",
+        "bg-green-500/20 text-green-400",
+        "bg-orange-500/20 text-orange-400",
+        "bg-pink-500/20 text-pink-400",
+    ];
 
     return (
         <div className="max-w-3xl mx-auto -mt-15">
@@ -45,10 +41,26 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
             {/* Title */}
             <h1 className="text-4xl text-primary dark:text-gray-300 font-bold mb-6 ">{post?.title}</h1>
+            <div className="flex items-center justify-between mb-6">
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                    {post?.tags?.map((tag: any, i: number) => (
+                        <span
+                            key={tag.slug.current}
+                            className={`text-xs px-3 py-1 rounded-full font-medium ${tagColors[i % tagColors.length]
+                                }`}
+                        >
+                            {tag.title}
+                        </span>
+                    ))}
+                </div>
 
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                {formatDate(post?.publishedAt)}
-            </p>
+                {/* Date */}
+                <p className="text-sm text-gray-400">
+                    {formatDate(post?.publishedAt)}
+                </p>
+
+            </div>
 
             {/* Image */}
             <div className="relative w-full aspect-video mb-8">
@@ -73,6 +85,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 <PortableText value={post?.content} />
 
             </div>
+
             <CommentSection
                 postId={post?._id}
                 comments={post?.comments}
