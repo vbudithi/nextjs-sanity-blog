@@ -6,6 +6,7 @@ import { PortableText } from "next-sanity";
 import { formatDate } from "@/lib/formatDate";
 import CommentSection from "@/app/components/commentSection";
 import { BLOG_BY_SLUG_QUERY } from "@/lib/queries";
+import TagBadge from "@/app/components/TagBadge";
 
 interface BlogPageProps {
     params: Promise<{
@@ -22,13 +23,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const post = await getBlogPost(slug);
 
 
-    const tagColors = [
-        "bg-blue-500/20 text-blue-400",
-        "bg-purple-500/20 text-purple-400",
-        "bg-green-500/20 text-green-400",
-        "bg-orange-500/20 text-orange-400",
-        "bg-pink-500/20 text-pink-400",
-    ];
 
     return (
         <div className="max-w-3xl mx-auto -mt-15">
@@ -45,13 +39,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
                     {post?.tags?.map((tag: any, i: number) => (
-                        <span
+                        <TagBadge
                             key={tag.slug.current}
-                            className={`text-xs px-3 py-1 rounded-full font-medium ${tagColors[i % tagColors.length]
-                                }`}
-                        >
-                            {tag.title}
-                        </span>
+                            label={tag.title}
+                        />
                     ))}
                 </div>
 
