@@ -4,12 +4,28 @@ export default defineType({
     name: "blog",
     title: "Blog",
     type: "document",
+
+    fieldsets: [
+        {
+            name: "contentSection",
+            title: "Article Content",
+            options: { collapsible: true }
+        },
+        {
+            name: "seo",
+            title: "SEO Settings",
+            options: { collapsible: true, collapsed: true }
+        }
+
+    ],
+
     fields: [
         defineField({
             name: "title",
             title: "Title of blog article",
             type: "string",
             validation: (Rule) => Rule.required(),
+            fieldset: "contentSection"
         }),
 
         defineField({
@@ -21,6 +37,7 @@ export default defineType({
                 maxLength: 96,
             },
             validation: (Rule) => Rule.required(),
+            fieldset: "contentSection"
         }),
 
         defineField({
@@ -28,19 +45,45 @@ export default defineType({
             title: "Title Image",
             type: "image",
             options: { hotspot: true },
-        }),
-
-        defineField({
-            name: "content",
-            title: "Content",
-            type: "array",
-            of: [{ type: "block" }],
+            fieldset: "contentSection"
         }),
 
         defineField({
             name: "smallDescription",
             title: "Small Description",
             type: "text",
+            fieldset: "contentSection"
+        }),
+
+        defineField({
+            name: "content",
+            title: "Content",
+            type: "array",
+            of: [
+                { type: "block" },
+
+                {
+                    type: "image",
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: "alt",
+                            type: "string",
+                            title: "Alt text",
+                        },
+                    ],
+                },
+
+                {
+                    type: "code",
+                    title: "Code Block",
+                    options: {
+                        withFilename: true,
+                        language: "javascript",
+                    },
+                },
+            ],
+            fieldset: "contentSection"
         }),
 
         defineField({
@@ -48,9 +91,9 @@ export default defineType({
             title: "Published At",
             type: "datetime",
             initialValue: () => new Date().toISOString(),
+            fieldset: "contentSection"
         }),
 
-        // ✅ ADD THIS
         defineField({
             name: "tags",
             title: "Tags",
@@ -61,6 +104,51 @@ export default defineType({
                     to: [{ type: "tag" }],
                 },
             ],
+            fieldset: "contentSection"
+        }),
+
+        //SEO Fields
+
+        defineField({
+            name: "seoTitle",
+            title: "SEO Title",
+            type: "string",
+            description: "Title shown in Google search results.",
+            fieldset: "seo",
+        }),
+
+        defineField({
+            name: "seoDescription",
+            title: "SEO Description",
+            type: "text",
+            rows: 3,
+            description: "Short description for Google and social media previews.",
+            fieldset: "seo",
+        }),
+
+        defineField({
+            name: "ogImage",
+            title: "Open Graph Image",
+            type: "image",
+            description: "Image used for social sharing (1200x630 recommended).",
+            options: { hotspot: true },
+            fieldset: "seo",
+        }),
+
+        defineField({
+            name: "canonicalUrl",
+            title: "Canonical URL",
+            type: "url",
+            description: "Optional. Helps avoid duplicate content issues.",
+            fieldset: "seo",
+        }),
+
+        defineField({
+            name: "noIndex",
+            title: "Hide from Search Engines",
+            type: "boolean",
+            description: "Enable this to prevent Google from indexing this page.",
+            fieldset: "seo",
         }),
     ],
 });

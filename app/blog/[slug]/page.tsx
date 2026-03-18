@@ -7,6 +7,10 @@ import { formatDate } from "@/lib/formatDate";
 import CommentSection from "@/app/components/commentSection";
 import { BLOG_BY_SLUG_QUERY } from "@/lib/queries";
 import TagBadge from "@/app/components/TagBadge";
+import { portableTextComponents } from "@/lib/PortableTextComponents";
+import BlogReader from "@/app/components/BlogReader";
+import { calculateReadTime } from "@/lib/readTime";
+import { extractPlainText } from "@/lib/extractText";
 
 interface BlogPageProps {
     params: Promise<{
@@ -22,6 +26,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const { slug } = await params;
     const post = await getBlogPost(slug);
 
+    const plainText = extractPlainText(post.content);
+    const readTime = calculateReadTime(plainText);
 
 
     return (
@@ -52,6 +58,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 </p>
 
             </div>
+            <BlogReader text={plainText} />
+            <p className="text-gray-400 text-sm ">{readTime} min read</p>
 
             {/* Image */}
             <div className="relative w-full aspect-video mb-8">
@@ -72,9 +80,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 {post?.smallDescription}
             </p>
             {/* content */}
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-                <PortableText value={post?.content} />
-
+            <div className="prose prose-lg dark:prose-invert max-w-none
+  prose-h1:mt-8 prose-h1:mb-4
+  prose-h2:mt-6 prose-h2:mb-3
+  prose-h3:mt-4 prose-h3:mb-2
+  prose-p:mb-4
+// ">
+                <PortableText value={post?.content} components={portableTextComponents} />
             </div>
 
             <CommentSection

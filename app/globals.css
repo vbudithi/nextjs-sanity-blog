@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
+@import "prismjs/themes/prism-tomorrow.css";
+
 
 @custom-variant dark (&:is(.dark *));
 .ai-face {
@@ -186,3 +188,16 @@
 .animate-fade-in {
   animation: fade-in 0.6s ease-out;
 }
+/* Code block base */
+pre code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.9rem;
+}
+
+/* Syntax tokens */
+.token.comment { color: #8b949e; }
+.token.keyword { color: #ff7b72; }
+.token.string { color: #a5d6ff; }
+.token.function { color: #d2a8ff; }
+.token.number { color: #79c0ff; }
+.token.operator { color: #ffab70; }
