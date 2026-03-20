@@ -22,14 +22,18 @@ export default function BlogReader({ text }: { text: string }) {
             {!isReading ? (
                 <button
                     onClick={speak}
-                    className="px-3 py-1  bg-purple-800 text-white rounded-md cursor-pointer"
+                    className="px-3 py-1 bg-purple-500 hover:bg-purple-600  text-white rounded-md cursor-pointer dark:bg-purple-900 
+    dark:hover:bg-purple-800
+"
                 >
                     🔊 Listen
                 </button>
             ) : (
                 <button
                     onClick={stop}
-                    className="px-3 py-1 bg-red-800 text-white rounded-md cursor-pointer"
+                    className="px-3 py-1 bg-red-700 hover:bg-red-800 text-white rounded-md cursor-pointer   dark:bg-red-500 
+    dark:hover:bg-red-400
+"
                 >
                     ⏹ Stop
                 </button>

@@ -11,6 +11,7 @@ import { portableTextComponents } from "@/lib/PortableTextComponents";
 import BlogReader from "@/app/components/BlogReader";
 import { calculateReadTime } from "@/lib/readTime";
 import { extractPlainText } from "@/lib/extractText";
+import SummaryClient from "@/app/components/SummaryClient";
 
 interface BlogPageProps {
     params: Promise<{
@@ -60,6 +61,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
             </div>
             <BlogReader text={plainText} />
             <p className="text-gray-400 text-sm ">{readTime} min read</p>
+
+            {/* AI summarization */}
+            <SummaryClient articleContent={plainText} />
+
 
             {/* Image */}
             <div className="relative w-full aspect-video mb-8">
