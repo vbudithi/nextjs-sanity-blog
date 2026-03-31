@@ -1,10 +1,10 @@
 export const tagColorMap: Record<string, string> = {
-    "chatgpt": "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400",
+    "ai": "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400",
     "ai hardware": "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300",
-    "google-gemini": "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400",
-    "anthropic-claude": "bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400",
-    "ai": "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400",
-    "machine learning": "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-400",
+    "ai automation": "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400",
+    "local ai": "bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400",
+    "multimodal": "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400",
+    "rag": "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-400",
     "ai agents": "bg-yellow-100 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-400",
 };
 

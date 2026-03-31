@@ -4,6 +4,12 @@ export interface simpleBlogCard {
     currentSlug: string,
     titleImage: any,
     publishedAt: string,
+    content: {
+        _type: "block";
+        children: {
+            text: string;
+        }[];
+    }[];
     tags?: {
         title: string;
         slug: {

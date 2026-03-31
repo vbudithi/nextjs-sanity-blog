@@ -25,7 +25,7 @@ export default function SummaryClient({ articleContent }: { articleContent: stri
             <button
                 onClick={summarizeArticle}
                 className="
-    px-4 py-2 
+    px-2 py-2 
     bg-primary 
     text-white 
     dark:bg-blue-900 

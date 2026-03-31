@@ -1,62 +1,123 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { formatDate } from "@/lib/formatDate";
-import { simpleBlogCard } from "@/lib/interface";
-import { urlFor } from "@/lib/sanity";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/lib/sanity";
+import { formatDate } from "@/lib/formatDate";
 import TagBadge from "@/app/components/TagBadge";
+import { ArrowRight } from "lucide-react";
+import { simpleBlogCard } from "@/lib/interface";
+import { portableTextToPlainText } from "@/lib/portableTextToPlainText";
 
 export default function BlogCard({ post }: { post: simpleBlogCard }) {
+    console.log("content:", portableTextToPlainText(post.content));
+    const [flipped, setFlipped] = useState(false);
     const href = `/blog/${post?.currentSlug}`;
 
     return (
-        <div className="flex flex-col h-full">
-
-            <Link href={href} className="block h-full">
-                <Card className="flex flex-col overflow-hidden bg-slate-50 dark:bg-gray-900 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl dark:hover:bg-gray-800">
-
-                    {/* Image */}
-                    <div className="relative w-full h-40">
-                        <Image
-                            src={urlFor(post.titleImage).width(600).height(400).url()}
-                            alt={post.title || "Blog Image"}
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-
-                    <CardContent className="flex flex-col flex-1 p-5">
-
-                        {/* Title */}
-                        <h2 className="text-xl font-semibold line-clamp-1  text-slate-900 dark:text-slate-100">
-                            {post.title}
-                        </h2>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mb-2 mt-4">
-                            {post.tags?.slice(0, 2).map((tag: any, i: number) => (
-                                <TagBadge
-                                    key={tag.slug.current}
-                                    label={tag.title}
-                                    href={`/tags/${tag.slug.current}`}
-                                />
-                            ))}
+        <div className="w-[300px] h-[360px] perspective">
+            <div
+                className={`relative w-full h-full transition-transform duration-500 
+        [transform-style:preserve-3d] ${flipped ? "rotate-y-180" : ""}`}
+            >
+                {/* FRONT */}
+                <div className="absolute w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-lg bg-slate-50 dark:bg-gray-900">
+                    <Link href={href} className="block h-full">
+                        {/* Image */}
+                        <div className="relative w-full h-40">
+                            <Image
+                                src={
+                                    post?.titleImage
+                                        ? urlFor(post.titleImage).width(600).height(400).url()
+                                        : "/default-image.jpg"
+                                }
+                                alt={post.title}
+                                fill
+                                className="object-cover object-top"
+                            />
                         </div>
 
-                        {/* Description */}
-                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mt-3 min-h-10">
-                            {post.smallDescription}
-                        </p>
+                        <div className="p-5">
+                            <h2 className="text-lg font-semibold line-clamp-1">
+                                {post.title}
+                            </h2>
 
-                        {/* Date */}
-                        <div className="mt-auto">
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <div className="flex gap-2 mt-3">
+                                {post.tags?.slice(0, 2).map((tag) => (
+                                    <TagBadge
+                                        key={tag.slug.current}
+                                        label={tag.title}
+                                        href={`/tags/${tag.slug.current}`}
+                                    />
+                                ))}
+                            </div>
+
+                            <p className="text-sm mt-3 line-clamp-2 text-gray-600 dark:text-gray-300">
+                                {post.smallDescription}
+                            </p>
+                            <p className="text-xs mt-4 text-gray-500">
                                 {formatDate(post?.publishedAt)}
                             </p>
                         </div>
-                    </CardContent>
-                </Card>
-            </Link>
-        </div>
+                    </Link>
+                    <button
+                        onClick={(e) => {
+                            setFlipped(true);
+                        }}
+                        className="absolute bottom-3 right-3 z-10 
+           bg-black/50 backdrop-blur-md border border-white/10
+           text-white p-2 rounded-full 
+           hover:scale-110 hover:bg-black/70 
+           transition-all duration-200 cursor-pointer">
+                        <ArrowRight size={16} />
+                    </button>
+                </div>
+
+                {/* BACK */}
+                <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-lg bg-black text-white p-5 flex flex-col justify-between">
+
+                    {/* BACK ICON */}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setFlipped(false);
+                        }}
+                        className="absolute top-3 right-3 z-10 bg-white/20 p-2 rounded-full cursor-pointer hover:bg-white/30 transition-all duration-200"
+                    >
+                        ✕
+                    </button>
+
+                    <div className="flex flex-col gap-3">
+                        <h3 className="text-lg font-bold line-clamp-2">
+                            {post.title}
+                        </h3>
+
+                        <div className="h-px bg-white/20" />
+
+                        <p className="text-xs text-gray-400 uppercase tracking-wide">
+                            Key Insights
+                        </p>
+
+                        <ul className="text-sm text-gray-300 space-y-2">
+                            {portableTextToPlainText(post.content)
+                                .split(".")
+                                .slice(0, 3)
+                                .map((sentence, i) => (
+                                    <li key={i}>• {sentence.trim()}</li>
+                                ))}
+                        </ul>
+                    </div>
+
+                    <Link href={href}>
+                        <button className="text-sm underline cursor-pointer self-end mt-4 hover:text-gray-300 transition-colors duration-200">
+                            Read Full Article →
+                        </button>
+                    </Link>
+                </div>
+
+            </div>
+        </div >
     );
 }

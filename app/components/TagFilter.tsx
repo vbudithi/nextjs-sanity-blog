@@ -12,7 +12,7 @@ export default function TagFilter({ tags }: { tags: string[] }) {
 
     const handleClick = (tag: string) => {
         if (tag === activeTag) {
-            router.push("/"); // clear filter
+            router.push("/");
         } else {
             router.push(`/?tag=${encodeURIComponent(tag)}`);
         }

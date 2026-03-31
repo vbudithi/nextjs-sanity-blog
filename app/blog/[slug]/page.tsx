@@ -12,6 +12,7 @@ import BlogReader from "@/app/components/BlogReader";
 import { calculateReadTime } from "@/lib/readTime";
 import { extractPlainText } from "@/lib/extractText";
 import SummaryClient from "@/app/components/SummaryClient";
+import ArticleChatbot from "@/app/components/ArticleChatbot";
 
 interface BlogPageProps {
     params: Promise<{
@@ -27,19 +28,22 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const { slug } = await params;
     const post = await getBlogPost(slug);
 
-    const plainText = extractPlainText(post.content);
+    const plainText = extractPlainText(post?.content);
     const readTime = calculateReadTime(plainText);
 
-
     return (
-        <div className="max-w-3xl mx-auto -mt-15">
+        <div className="max-w-5xl mx-auto -mt-15">
             <div className="flex items-center justify-between  ">
                 <div className="inline-block">
                     <BackButton />
                 </div>
                 <ExploreButton />
             </div>
-
+            <div className="mb-8 p-4 rounded-lg bg-gradient-to-r from-green-500/10 to-blue-500/10 border">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                    🧪 Part of my journey building real AI systems from scratch.
+                </p>
+            </div>
             {/* Title */}
             <h1 className="text-4xl text-primary dark:text-gray-300 font-bold mb-6 ">{post?.title}</h1>
             <div className="flex items-center justify-between mb-6">
@@ -59,24 +63,34 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 </p>
 
             </div>
-            <BlogReader text={plainText} />
-            <p className="text-gray-400 text-sm ">{readTime} min read</p>
+            <div className="flex items-start justify-between gap-6 my-4">
 
-            {/* AI summarization */}
-            <SummaryClient articleContent={plainText} />
+                {/* Left: Voice Reader */}
+                <div className="flex-1">
+                    <BlogReader text={plainText} />
+                    <p className="text-gray-400 text-sm mt-2">{readTime} min read</p>
+                </div>
 
+                {/* Right: AI Summary */}
+                <div >
+                    <SummaryClient articleContent={plainText} />
+                    <div className="mt-12">
+                        <ArticleChatbot article={plainText} />
+                    </div>
+                </div>
+            </div>
 
             {/* Image */}
-            <div className="relative w-full aspect-video mb-8">
+            <div className="relative w-full aspect-video mb-8 max-w-4xl items-center justify-center mx-auto">
                 <Image
                     src={
                         post?.titleImage
-                            ? urlFor(post.titleImage).width(1200).height(675).url()
+                            ? urlFor(post.titleImage).width(1000).height(675).url()
                             : "/default-image.jpg"
                     }
                     alt={post?.title || "Blog Image"}
                     fill
-                    className="rounded-xl object-cover shadow-md"
+                    className="rounded-xl object-cover  object-top shadow-md"
                 />
             </div>
 
@@ -85,13 +99,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 {post?.smallDescription}
             </p>
             {/* content */}
-            <div className="prose prose-lg dark:prose-invert max-w-none
-  prose-h1:mt-8 prose-h1:mb-4
-  prose-h2:mt-6 prose-h2:mb-3
-  prose-h3:mt-4 prose-h3:mb-2
-  prose-p:mb-4
-// ">
-                <PortableText value={post?.content} components={portableTextComponents} />
+            <div className="prose prose-invert max-w-none">
+                <PortableText
+                    value={post?.content}
+                    components={portableTextComponents}
+                />
             </div>
 
             <CommentSection

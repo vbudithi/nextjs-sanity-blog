@@ -21,14 +21,12 @@ export default async function Home({ searchParams, }: {
     : undefined;
   console.log("ACTIVE TAG FROM URL:", activeTag);
 
-
   // Collect all unique tags for the filter bar
   const allTags = Array.from(
     new Set(
       data.flatMap((post) => post.tags?.map((t: any) => t.title.toLowerCase()) || [])
     )
   );
-
 
   // Filter posts by tag
   const filteredPosts = activeTag
@@ -37,9 +35,7 @@ export default async function Home({ searchParams, }: {
     )
     : data;
 
-
   console.log("FILTERED POSTS:", filteredPosts.map(p => p.title));
-
 
   console.log(
     "ALL POST TAGS:",

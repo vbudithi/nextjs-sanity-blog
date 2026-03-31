@@ -4,6 +4,7 @@ export const BLOG_QUERY = `
   smallDescription,
   "currentSlug": slug.current,
   titleImage,
+  content,
   publishedAt,
   "tags": tags[]->{
     title,

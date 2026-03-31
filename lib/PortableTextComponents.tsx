@@ -6,13 +6,22 @@ export const portableTextComponents = {
     // Custom renderer for images in content in sanity studio
     types: {
         image: ({ value }: { value: any }) => (
-            <Image
-                src={urlFor(value).url()}
-                alt={value.alt || "Blog image"}
-                width={700}
-                height={400}
-                className="rounded-xl my-6"
-            />
+            <div className="my-10 flex justify-center">
+                <div className="w-full max-w-xl">
+                    <Image
+                        src={urlFor(value).width(600).url()}
+                        alt={value.alt || "Blog image"}
+                        width={600}
+                        height={400}
+                        className="w-full h-auto rounded-xl object-contain"
+                    />
+                    {value.alt && (
+                        <p className="text-center text-sm text-gray-500 mt-2">
+                            {value.alt}
+                        </p>
+                    )}
+                </div>
+            </div>
         ),
 
         code: ({ value }: { value: any }) => <CodeBlock value={value} />,
@@ -30,6 +39,35 @@ export const portableTextComponents = {
 
         normal: ({ children }: any) => (
             <p className="mb-4 leading-relaxed">{children}</p>
+        ),
+    },
+
+    // Custom renderer for bullet lists  in sanity studio
+    list: {
+        bullet: ({ children }: any) => (
+            <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-300" >
+                {children}
+            </ul>
+        ),
+    },
+
+    listItem: {
+        bullet: ({ children }: any) => (
+            <li className="leading-relaxed" > {children} </li>
+        ),
+    },
+
+    // Custom renderer for marks (like bold, code, etc.) in sanity studio
+
+    marks: {
+        strong: ({ children }: any) => (
+            <strong className="text-white font-semibold" > {children} </strong>
+        ),
+
+        code: ({ children }: any) => (
+            <code className="bg-gray-800 px-1.5 py-0.5 rounded text-sm" >
+                {children}
+            </code>
         ),
     },
 
