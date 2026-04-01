@@ -32,8 +32,7 @@ export default function CodeBlock({ value }: { value: any }) {
             {/* Copy Button */}
             <button
                 onClick={handleCopy}
-                className=" absolute top-2 right-3 z-50 px-3 py-1 text-xs rounded-md  bg-gray-900 text-gray-200 border border-gray-600 hover:bg-gray-800 transition
-cursor-pointer"
+                className=" absolute top-2 right-3 z-50 px-3 py-1 text-xs rounded-md  bg-gray-900 text-gray-200 border border-gray-600 hover:bg-gray-800 transition cursor-pointer"
             >
                 {copied ? "Copied!" : "Copy"}
             </button>
@@ -41,7 +40,7 @@ cursor-pointer"
             {/* Code */}
             <pre suppressHydrationWarning
                 className="p-4 overflow-x-auto text-sm leading-relaxed relative z-10 overflow-y-auto max-h-[500px]">
-                <code className={`language-${value.language || "javascript"}`}>
+                <code className={`language-${value.language || "Javascript"}`}>
                     {value.code}
                 </code>
             </pre>

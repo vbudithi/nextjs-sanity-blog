@@ -45,7 +45,7 @@ export const portableTextComponents = {
     // Custom renderer for bullet lists  in sanity studio
     list: {
         bullet: ({ children }: any) => (
-            <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-300" >
+            <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-500" >
                 {children}
             </ul>
         ),
@@ -58,7 +58,6 @@ export const portableTextComponents = {
     },
 
     // Custom renderer for marks (like bold, code, etc.) in sanity studio
-
     marks: {
         strong: ({ children }: any) => (
             <strong className="text-white font-semibold" > {children} </strong>

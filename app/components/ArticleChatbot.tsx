@@ -6,7 +6,6 @@ interface ArticleChatbotProps {
     article: string;
 }
 
-
 export default function Chatbot({ article }: ArticleChatbotProps) {
     console.log("ARTICLE PASSED:", article);
 

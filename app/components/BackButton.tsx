@@ -5,20 +5,18 @@ export default function BackButton() {
 
     const router = useRouter();
     return (
-        <div className="max-w-3xl mx-auto py-10 px-4">
+        <div className="max-w-3xl mx-auto py-6">
             <button
                 onClick={() => router.back()}
-                className="flex items-center gap-1 px-3 py-1 rounded-md 
-             bg-gray-200 text-gray-800 
-             dark:bg-gray-700 dark:text-gray-200
-             hover:bg-gray-300 dark:hover:bg-gray-600
-             transition cursor-pointer font-medium"
-
+                className="group flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all cursor-pointer"
             >
-                <ArrowLeft size={25} /><span>Back</span>
 
+                <ArrowLeft
+                    size={18}
+                    className="transition-transform duration-200 group-hover:-translate-x-1"
+                />
+                <span>Back to articles</span>
             </button>
         </div>
-
     )
 }
