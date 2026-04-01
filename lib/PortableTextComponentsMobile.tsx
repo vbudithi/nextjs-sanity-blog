@@ -27,19 +27,19 @@ export const PortableTextComponentsMobile = {
 
     block: {
         h1: ({ children }: any) => (
-            <h1 className="text-xl font-bold mt-6 mb-3 leading-tight">
+            <h1 className="text-xl font-bold mt-6 mb-3 leading-tight text-gray-900 dark:text-white">
                 {children}
             </h1>
         ),
 
         h2: ({ children }: any) => (
-            <h2 className="text-lg font-semibold mt-5 mb-2 leading-snug">
+            <h2 className="text-lg font-semibold mt-5 mb-2 leading-snug text-gray-900 dark:text-white">
                 {children}
             </h2>
         ),
 
         normal: ({ children }: any) => (
-            <p className="mb-4 leading-7 text-sm text-gray-300">
+            <p className="mb-4 leading-7 text-sm text-gray-900 dark:text-white">
                 {children}
             </p>
         ),
@@ -47,7 +47,7 @@ export const PortableTextComponentsMobile = {
 
     list: {
         bullet: ({ children }: any) => (
-            <ul className="list-disc pl-5 space-y-2 mb-5 text-sm text-gray-300">
+            <ul className="list-disc pl-5 space-y-2 mb-5 text-sm text-gray-900 dark:text-gray-200">
                 {children}
             </ul>
         ),
@@ -61,13 +61,13 @@ export const PortableTextComponentsMobile = {
 
     marks: {
         strong: ({ children }: any) => (
-            <strong className="text-white font-semibold">
+            <strong className="text-gray-900 dark:text-white font-semibold">
                 {children}
             </strong>
         ),
 
         code: ({ children }: any) => (
-            <code className="bg-gray-800 px-1.5 py-0.5 rounded text-xs">
+            <code className="text-gray-900 dark:text-gray-200 bg-gray-800 px-1.5 py-0.5 rounded text-xs ">
                 {children}
             </code>
         ),

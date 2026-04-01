@@ -30,22 +30,22 @@ export const portableTextComponents = {
     // Custom renderer for block types (like paragraphs, headings, etc.) in sanity studio
     block: {
         h1: ({ children }: any) => (
-            <h1 className="text-3xl font-bold mt-10 mb-4">{children}</h1>
+            <h1 className="text-3xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">{children}</h1>
         ),
 
         h2: ({ children }: any) => (
-            <h2 className="text-2xl font-semibold mt-8 mb-3">{children}</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-3 text-gray-900 dark:text-white">{children}</h2>
         ),
 
         normal: ({ children }: any) => (
-            <p className="mb-4 leading-relaxed">{children}</p>
+            <p className="mb-4 leading-relaxed text-gray-900 dark:text-white">{children}</p>
         ),
     },
 
     // Custom renderer for bullet lists  in sanity studio
     list: {
         bullet: ({ children }: any) => (
-            <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-500" >
+            <ul className="list-disc pl-6 space-y-2 mb-6 text-gray-700 dark:text-gray-300" >
                 {children}
             </ul>
         ),
@@ -60,11 +60,11 @@ export const portableTextComponents = {
     // Custom renderer for marks (like bold, code, etc.) in sanity studio
     marks: {
         strong: ({ children }: any) => (
-            <strong className="text-white font-semibold" > {children} </strong>
+            <strong className=" text-gray-900 dark:text-white" > {children} </strong>
         ),
 
         code: ({ children }: any) => (
-            <code className="bg-gray-800 px-1.5 py-0.5 rounded text-sm" >
+            <code className="text-gray-900 dark:text-gray-200 px-1.5 py-0.5 rounded text-sm bg-gray-200 dark:bg-gray-800" >
                 {children}
             </code>
         ),
