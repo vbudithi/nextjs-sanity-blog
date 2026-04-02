@@ -2,13 +2,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { VivHead } from "./VivHead";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const menuRef = useRef(null);
 
     return (
         <nav className="w-full border-b border-gray-300 dark:border-gray-800 bg-sky-100 dark:bg-transparent ">
@@ -55,12 +56,16 @@ export default function Navbar() {
                     ☰
                 </button>
             </div>
-
             {/* Mobile Menu*/}
+
             {open && (
-                <div className="md:hidden absolute left-0 top-16 w-full bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 px-4 py-4 flex flex-col gap-4 shadow-lg z-50 mt-5">
-
-
+                <div
+                    className="fixed inset-0 bg-black/40 z-40"
+                    onClick={() => setOpen(false)}
+                />
+            )}
+            {open && (
+                <div ref={menuRef} className="md:hidden absolute left-0 top-16 w-full bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 px-4 py-4 flex flex-col gap-4 shadow-lg z-50 mt-5">
                     <Link href="/" onClick={() => setOpen(false)} className="text-base font-medium">Articles</Link>
                     <Link href="/about" onClick={() => setOpen(false)} className="text-base font-medium ">About</Link>
 
@@ -75,8 +80,6 @@ export default function Navbar() {
                     >
                         Byte News ↗
                     </Link>
-
-
                     <Link href="/contact" onClick={() => setOpen(false)} className="text-base font-medium">Contact</Link>
 
                     <div className="flex justify-between items-center w-full mt-2">
@@ -91,8 +94,6 @@ export default function Navbar() {
                             <ModeToggle />
                         </div>
                     </div>
-
-
                 </div>
             )}
         </nav>

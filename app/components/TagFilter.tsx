@@ -20,10 +20,8 @@ export default function TagFilter({ tags }: { tags: string[] }) {
 
     return (
         <div className="flex gap-5 mb-6 flex-wrap justify-center">
-
             {tags?.map((tag) => {
                 const isActive = activeTag === tag;
-
                 return (
                     <button
                         key={tag}
@@ -33,10 +31,10 @@ export default function TagFilter({ tags }: { tags: string[] }) {
                         <TagBadge
                             label={tag}
                             variant="filter"
-                            rightIcon={isActive ? <XCircle className="w-3 h-3" /> : undefined}
+                            rightIcon={isActive ? <XCircle className="w-6 h-4" /> : undefined}
                             className={
                                 isActive
-                                    ? "bg-gray-800 text-white ring-2 ring-gray-400 scale-105 cursor-pointer"
+                                    ? "bg-gray-800 text-green-400 ring-2 ring-gray-400 scale-105 cursor-pointer"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 cursor-pointer"
                             }
                         />

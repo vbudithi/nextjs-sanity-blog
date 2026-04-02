@@ -6,7 +6,7 @@ import Link from "next/link";
 import { urlFor } from "@/lib/sanity";
 import { formatDate } from "@/lib/formatDate";
 import TagBadge from "@/app/components/TagBadge";
-import { ArrowRight } from "lucide-react";
+import { Eye } from "lucide-react";
 import { simpleBlogCard } from "@/lib/interface";
 import { portableTextToPlainText } from "@/lib/portableTextToPlainText";
 
@@ -16,7 +16,7 @@ export default function BlogCard({ post }: { post: simpleBlogCard }) {
     const href = `/blog/${post?.currentSlug}`;
 
     return (
-        <div className="w-[300px] h-[360px] perspective">
+        <div className="w-[300px] h-[360px] perspective ">
             <div
                 className={`relative w-full h-full transition-transform duration-500 
         [transform-style:preserve-3d] ${flipped ? "rotate-y-180" : ""}`}
@@ -61,16 +61,15 @@ export default function BlogCard({ post }: { post: simpleBlogCard }) {
                             </p>
                         </div>
                     </Link>
+
                     <button
                         onClick={(e) => {
                             setFlipped(true);
-                        }}
-                        className="absolute bottom-3 right-3 z-10 
-           bg-black/50 backdrop-blur-md border border-white/10
-           text-white p-2 rounded-full 
-           hover:scale-110 hover:bg-black/70 
-           transition-all duration-200 cursor-pointer">
-                        <ArrowRight size={16} />
+                        }}>
+                        <div className="absolute bottom-2 right-2 flex items-center gap-1 text-xs text-gray-500 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 dark bg-black/50 backdrop-blur-md border border-white/10 px-2 py-1 rounded-full hover:scale-110 hover:bg-black/70">
+                            <Eye className="w-3 h-3" />
+                            <span>Quick View</span>
+                        </div>
                     </button>
                 </div>
 
