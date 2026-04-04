@@ -6,6 +6,7 @@ export const tagColorMap: Record<string, string> = {
     "multimodal": "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400",
     "rag": "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-400",
     "ai agents": "bg-yellow-100 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-400",
+    "ai security": "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400",
 };
 
 const fallbackColors = [

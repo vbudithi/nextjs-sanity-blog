@@ -62,15 +62,19 @@ export default function BlogCard({ post }: { post: simpleBlogCard }) {
                         </div>
                     </Link>
 
-                    <button
-                        onClick={(e) => {
-                            setFlipped(true);
-                        }}>
-                        <div className="absolute bottom-2 right-2 flex items-center gap-1 text-xs text-gray-500 cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 dark bg-black/50 backdrop-blur-md border border-white/10 px-2 py-1 rounded-full hover:scale-110 hover:bg-black/70">
-                            <Eye className="w-3 h-3" />
-                            <span>Quick View</span>
-                        </div>
-                    </button>
+                    <div className="absolute bottom-2 right-2 flex items-center gap-1 text-xs 
+text-gray-500 cursor-pointer hover:text-gray-700 
+dark:text-gray-300 transition-colors duration-200
+
+bg-white/70 dark:bg-black/50 
+backdrop-blur-md border border-black/10 dark:border-white/10 
+px-2 py-1 rounded-full hover:scale-110 
+hover:bg-white/90 dark:hover:bg-black/70"
+                    >
+                        <Eye className="w-3 h-3" />
+                        <span>Quick View</span>
+                    </div>
+
                 </div>
 
                 {/* BACK */}

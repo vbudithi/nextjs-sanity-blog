@@ -18,3 +18,31 @@
   margin-top: 1rem;
   margin-bottom: 0.6rem;
 }
+
+/* Red text */
+span[data-mark="redText"] {
+  color: red !important;
+}
+
+/* Green text */
+span[data-mark="greenText"] {
+  color: green !important;
+}
+
+/* Highlight */
+span[data-mark="highlight"] {
+  background: yellow !important;
+  padding: 2px 4px;
+}
+
+/* Black text */
+span[data-mark="blackText"] {
+  color: black !important;
+}
+
+/* White text */
+span[data-mark="whiteText"] {
+  color: white !important;
+  background: black !important;
+  padding: 2px 4px;
+}

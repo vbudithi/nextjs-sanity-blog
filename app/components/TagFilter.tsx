@@ -34,10 +34,11 @@ export default function TagFilter({ tags }: { tags: string[] }) {
                             rightIcon={isActive ? <XCircle className="w-6 h-4" /> : undefined}
                             className={
                                 isActive
-                                    ? "bg-gray-800 text-green-400 ring-2 ring-gray-400 scale-105 cursor-pointer"
+                                    ? "bg-gray-300 text-green-600 ring-2 ring-gray-400 scale-105 cursor-pointer dark:bg-gray-600 dark:text-green-400"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 cursor-pointer"
                             }
                         />
+
                     </button>
                 );
             })}
