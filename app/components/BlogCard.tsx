@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity";
@@ -10,9 +7,10 @@ import { Eye } from "lucide-react";
 import { simpleBlogCard } from "@/lib/interface";
 import { portableTextToPlainText } from "@/lib/portableTextToPlainText";
 
-export default function BlogCard({ post }: { post: simpleBlogCard }) {
+export default function BlogCard({ post, activeCard, setActiveCard }: { post: simpleBlogCard; activeCard: string | null; setActiveCard: (slug: string | null) => void }) {
     console.log("content:", portableTextToPlainText(post.content));
-    const [flipped, setFlipped] = useState(false);
+    const flipped = activeCard === post.currentSlug;
+
     const href = `/blog/${post?.currentSlug}`;
 
     return (
@@ -61,20 +59,25 @@ export default function BlogCard({ post }: { post: simpleBlogCard }) {
                             </p>
                         </div>
                     </Link>
+                    <button
+                        onClick={(e) => {
 
-                    <div className="absolute bottom-2 right-2 flex items-center gap-1 text-xs 
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setActiveCard(post.currentSlug);
+                        }}
+                        className="absolute bottom-2 right-2 flex items-center gap-1 text-xs 
 text-gray-500 cursor-pointer hover:text-gray-700 
 dark:text-gray-300 transition-colors duration-200
 
 bg-white/70 dark:bg-black/50 
 backdrop-blur-md border border-black/10 dark:border-white/10 
 px-2 py-1 rounded-full hover:scale-110 
-hover:bg-white/90 dark:hover:bg-black/70"
-                    >
+hover:bg-white/90 dark:hover:bg-black/70">
                         <Eye className="w-3 h-3" />
                         <span>Quick View</span>
-                    </div>
 
+                    </button>
                 </div>
 
                 {/* BACK */}
@@ -85,8 +88,10 @@ hover:bg-white/90 dark:hover:bg-black/70"
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            setFlipped(false);
+                            setActiveCard(null);
                         }}
+
+
                         className="absolute top-3 right-3 z-10 bg-white/20 p-2 rounded-full cursor-pointer hover:bg-white/30 transition-all duration-200"
                     >
                         ✕
@@ -103,13 +108,15 @@ hover:bg-white/90 dark:hover:bg-black/70"
                             Key Insights
                         </p>
 
-                        <ul className="text-sm text-gray-300 space-y-2">
+                        <ul className="text-sm text-gray-300 space-y-2 max-h-35 overflow-hidden relative">
                             {portableTextToPlainText(post.content)
                                 .split(".")
                                 .slice(0, 3)
                                 .map((sentence, i) => (
                                     <li key={i}>• {sentence.trim()}</li>
                                 ))}
+                            {/* Fade overlay */}
+                            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
                         </ul>
                     </div>
 
@@ -120,7 +127,7 @@ hover:bg-white/90 dark:hover:bg-black/70"
                     </Link>
                 </div>
 
-            </div>
+            </div >
         </div >
     );
 }

@@ -1,15 +1,17 @@
 import { sanityClient } from "@/lib/sanity";
 import { simpleBlogCard } from "@/lib/interface";
-import BlogCard from "./components/BlogCard";
 import { BLOG_QUERY } from "@/lib/queries";
 import TagFilter from "./components/TagFilter";
+import BlogGrid from "./components/BlogGrid";
 async function getBlogs() {
   return await sanityClient.fetch(BLOG_QUERY);
 }
 
-export default async function Home({ searchParams, }: {
+export default async function Home({ searchParams, posts }: {
   searchParams?: Promise<{ tag?: string }>;
+  posts: simpleBlogCard[];
 }) {
+
 
   console.log("SEARCH PARAMS RECEIVED:", searchParams);
   const params = await searchParams;
@@ -52,11 +54,8 @@ export default async function Home({ searchParams, }: {
       <TagFilter tags={allTags} />
 
       {/* BLOG GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:place-items-start place-items-center">
-        {filteredPosts.map((post) => (
-          <BlogCard key={post.currentSlug} post={post} />
-        ))}
-      </div>
+      <BlogGrid posts={filteredPosts} />
+
     </div>
   );
 }

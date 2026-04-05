@@ -1,137 +1,149 @@
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
-import CodeBlockMobile from "@/app/components/CodeBlockMobile";
+import CodeBlock from "@/app/components/CodeBlock";
 
 export const PortableTextComponentsMobile = {
+    // images
     types: {
-        image: ({ value }: any) => (
-            <div className="my-6">
-                <Image
-                    src={urlFor(value).width(600).url()}
-                    alt={value.alt || "Blog image"}
-                    width={600}
-                    height={400}
-                    className="w-full h-auto rounded-lg"
-                />
+        image: ({ value }: { value: any }) => (
+            <figure className="my-12 flex flex-col items-center">
+                <div className="w-full max-w-3xl px-2 md:px-0">
+                    <Image
+                        src={urlFor(value).width(1200).url()}
+                        alt={value.alt || "Blog image"}
+                        width={1200}
+                        height={700}
+                        className="w-full h-auto rounded-xl object-cover"
+                    />
+                </div>
 
                 {value.alt && (
-                    <p className="text-center text-xs text-gray-500 mt-2 px-2">
+                    <figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 mt-3 max-w-2xl">
                         {value.alt}
-                    </p>
+                    </figcaption>
                 )}
-            </div>
+            </figure>
         ),
 
-        code: ({ value }: { value: any }) => <CodeBlockMobile value={value} />,
+        code: ({ value }: { value: any }) => <CodeBlock value={value} />,
     },
 
-
-    // Custom renderer for block types (like paragraphs, headings, quote etc.) in sanity studio
+    // blocks
     block: {
         blockquote: ({ children }: any) => (
-            <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 dark:text-gray-400 my-6">
+            <blockquote className="border-l-4 border-blue-500 pl-5 italic text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300 my-10 bg-gray-50 dark:bg-gray-900/40 py-4 rounded-r-md">
                 {children}
             </blockquote>
         ),
+
         h1: ({ children }: any) => (
-            <h1 className="text-xl font-bold mt-6 mb-3 leading-tight text-gray-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mt-12 mb-6 text-gray-900 dark:text-white leading-tight">
                 {children}
             </h1>
         ),
 
         h2: ({ children }: any) => (
-            <h2 className="text-lg font-semibold mt-5 mb-2 leading-snug text-gray-900 dark:text-white">
+            <h2 className="text-xl md:text-3xl font-semibold mt-12 mb-4 text-gray-900 dark:text-white">
                 {children}
             </h2>
         ),
+
         h3: ({ children }: any) => (
-            <h3 className="text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-white">
+            <h3 className="text-lg md:text-2xl font-semibold mt-10 mb-3 text-gray-900 dark:text-white">
                 {children}
             </h3>
         ),
 
         h4: ({ children }: any) => (
-            <h4 className="text-lg font-semibold mt-5 mb-2 text-gray-900 dark:text-white">
+            <h4 className="text-base md:text-lg font-semibold mt-8 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h4>
         ),
 
         h5: ({ children }: any) => (
-            <h5 className="text-base font-semibold mt-4 mb-2 text-gray-900 dark:text-white">
+            <h5 className="text-sm md:text-base font-semibold mt-6 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h5>
         ),
 
         h6: ({ children }: any) => (
-            <h6 className="text-sm font-semibold mt-3 mb-2 text-gray-900 dark:text-white">
+            <h6 className="text-xs md:text-sm font-semibold mt-5 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h6>
         ),
 
         normal: ({ children }: any) => (
-            <p className="mb-4 leading-7 text-sm text-gray-900 dark:text-white">
+            <p className="text-[16.5px] md:text-lg leading-7 md:leading-8 mb-6 text-gray-800 dark:text-gray-200">
                 {children}
             </p>
         ),
     },
 
-    // Custom renderer for bullet lists  in sanity studio
+    //lists
     list: {
         bullet: ({ children }: any) => (
-            <ul className="list-disc pl-5 space-y-2 mb-5 text-sm text-gray-900 dark:text-gray-200">
+            <ul className="list-disc pl-6 space-y-3 md:space-y-4 mb-8 text-gray-700 dark:text-gray-300 text-[16.5px] md:text-lg">
                 {children}
             </ul>
         ),
+
         number: ({ children }: any) => (
-            <ol className="list-decimal pl-6 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
+            <ol className="list-decimal pl-6 space-y-3 md:space-y-4 mb-8 text-gray-700 dark:text-gray-300 text-[16.5px] md:text-lg">
                 {children}
             </ol>
-        )
+        ),
     },
 
     listItem: {
         bullet: ({ children }: any) => (
             <li className="leading-relaxed">{children}</li>
         ),
+
         number: ({ children }: any) => (
             <li className="leading-relaxed">{children}</li>
         ),
     },
 
-    // Custom renderer for marks (like bold, code, etc.) in sanity studio
+    // marks
     marks: {
         strong: ({ children }: any) => (
-            <strong className="text-gray-900 dark:text-white font-semibold">
+            <strong className="font-semibold text-gray-900 dark:text-white">
                 {children}
             </strong>
         ),
-        em: ({ children }: any) => (
-            <em className="italic">{children}</em>
-        ),
+
+        em: ({ children }: any) => <em className="italic">{children}</em>,
 
         underline: ({ children }: any) => (
             <span className="underline">{children}</span>
         ),
 
         code: ({ children }: any) => (
-            <code className="text-gray-900 dark:text-gray-200 bg-gray-800 px-1.5 py-0.5 rounded text-xs ">
+            <code className="text-sm px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200">
                 {children}
             </code>
         ),
+
         blackText: ({ children }: any) => (
-            <span className="text-gray-900 dark:text-white font-medium">{children}</span>
+            <span className="text-gray-900 dark:text-white font-medium">
+                {children}
+            </span>
         ),
+
         redText: ({ children }: any) => (
-            <span className="text-red-600 dark:text-red-400 font-medium">{children}</span>
+            <span className="text-red-600 dark:text-red-400 font-medium">
+                {children}
+            </span>
         ),
+
         greenText: ({ children }: any) => (
-            <span className="text-green-600 dark:text-green-400 font-medium">{children}</span>
+            <span className="text-green-600 dark:text-green-400 font-medium">
+                {children}
+            </span>
         ),
-        whiteText: ({ children }: any) => (
-            <span className="text-white font-medium">{children}</span>
-        ),
+
         highlight: ({ children }: any) => (
-            <span className="bg-yellow-300 dark:bg-yellow-500  text-black px-1 rounded">
+            <span className="bg-yellow-300 dark:bg-yellow-500 text-black px-1 rounded">
                 {children}
             </span>
         ),
