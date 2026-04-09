@@ -4,7 +4,7 @@ import CodeBlock from "@/app/components/CodeBlock";
 
 export const portableTextComponents = {
     types: {
-        image: ({ value }: { value: any }) => (
+        image: ({ value }: any) => (
             <figure className="my-12 flex flex-col items-center">
                 <div className="w-full max-w-xl">
                     {value?.asset ? (
@@ -30,7 +30,7 @@ export const portableTextComponents = {
             </figure>
         ),
 
-        code: ({ value }: { value: any }) => <CodeBlock value={value} />,
+        code: ({ value }: any) => <CodeBlock value={value} />,
     },
 
     block: {

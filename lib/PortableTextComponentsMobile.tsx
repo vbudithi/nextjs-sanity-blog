@@ -4,7 +4,7 @@ import CodeBlock from "@/app/components/CodeBlock";
 
 export const PortableTextComponentsMobile = {
     types: {
-        image: ({ value }: { value: any }) => (
+        image: ({ value }: any) => (
             <figure className="my-10 flex flex-col items-center">
                 <div className="w-full max-w-3xl px-2 md:px-0">
                     {value?.asset ? (
@@ -32,53 +32,53 @@ export const PortableTextComponentsMobile = {
             </figure>
         ),
 
-        code: ({ value }: { value: any }) => <CodeBlock value={value} />,
+        code: ({ value }: any) => <CodeBlock value={value} />,
     },
 
     block: {
-        blockquote: ({ children }: { children: any }) => (
+        blockquote: ({ children }: any) => (
             <blockquote className="border-l-4 border-blue-500 pl-4 md:pl-5 italic text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300 my-8 md:my-10 bg-gray-50 dark:bg-gray-900/40 py-3 md:py-4 rounded-r-md">
                 {children}
             </blockquote>
         ),
 
-        h1: ({ children }: { children: any }) => (
+        h1: ({ children }: any) => (
             <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-5 text-gray-900 dark:text-white leading-tight">
                 {children}
             </h1>
         ),
 
-        h2: ({ children }: { children: any }) => (
+        h2: ({ children }: any) => (
             <h2 className="text-2xl md:text-3xl font-semibold mt-10 mb-4 text-gray-900 dark:text-white">
                 {children}
             </h2>
         ),
 
-        h3: ({ children }: { children: any }) => (
+        h3: ({ children }: any) => (
             <h3 className="text-xl md:text-2xl font-semibold mt-8 mb-3 text-gray-900 dark:text-white">
                 {children}
             </h3>
         ),
 
-        h4: ({ children }: { children: any }) => (
+        h4: ({ children }: any) => (
             <h4 className="text-lg md:text-xl font-semibold mt-6 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h4>
         ),
 
-        h5: ({ children }: { children: any }) => (
+        h5: ({ children }: any) => (
             <h5 className="text-base md:text-lg font-semibold mt-5 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h5>
         ),
 
-        h6: ({ children }: { children: any }) => (
+        h6: ({ children }: any) => (
             <h6 className="text-sm md:text-base font-semibold mt-4 mb-2 text-gray-900 dark:text-white">
                 {children}
             </h6>
         ),
 
-        normal: ({ children }: { children: any }) => (
+        normal: ({ children }: any) => (
             <p className="text-[16.5px] md:text-lg leading-7 md:leading-8 mb-6 text-gray-800 dark:text-gray-200">
                 {children}
             </p>
@@ -86,13 +86,13 @@ export const PortableTextComponentsMobile = {
     },
 
     list: {
-        bullet: ({ children }: { children: any }) => (
+        bullet: ({ children }: any) => (
             <ul className="list-disc pl-6 space-y-3 md:space-y-4 mb-8 text-gray-700 dark:text-gray-300 text-[16.5px] md:text-lg">
                 {children}
             </ul>
         ),
 
-        number: ({ children }: { children: any }) => (
+        number: ({ children }: any) => (
             <ol className="list-decimal pl-6 space-y-3 md:space-y-4 mb-8 text-gray-700 dark:text-gray-300 text-[16.5px] md:text-lg">
                 {children}
             </ol>
@@ -100,53 +100,53 @@ export const PortableTextComponentsMobile = {
     },
 
     listItem: {
-        bullet: ({ children }: { children: any }) => (
+        bullet: ({ children }: any) => (
             <li className="leading-relaxed">{children}</li>
         ),
 
-        number: ({ children }: { children: any }) => (
+        number: ({ children }: any) => (
             <li className="leading-relaxed">{children}</li>
         ),
     },
 
     marks: {
-        strong: ({ children }: { children: any }) => (
+        strong: ({ children }: any) => (
             <strong className="font-semibold text-gray-900 dark:text-white">
                 {children}
             </strong>
         ),
 
-        em: ({ children }: { children: any }) => <em className="italic">{children}</em>,
+        em: ({ children }: any) => <em className="italic">{children}</em>,
 
-        underline: ({ children }: { children: any }) => (
+        underline: ({ children }: any) => (
             <span className="underline">{children}</span>
         ),
 
-        code: ({ children }: { children: any }) => (
+        code: ({ children }: any) => (
             <code className="text-sm px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200">
                 {children}
             </code>
         ),
 
-        blackText: ({ children }: { children: any }) => (
+        blackText: ({ children }: any) => (
             <span className="text-gray-900 dark:text-white font-medium">
                 {children}
             </span>
         ),
 
-        redText: ({ children }: { children: any }) => (
+        redText: ({ children }: any) => (
             <span className="text-red-600 dark:text-red-400 font-medium">
                 {children}
             </span>
         ),
 
-        greenText: ({ children }: { children: any }) => (
+        greenText: ({ children }: any) => (
             <span className="text-green-600 dark:text-green-400 font-medium">
                 {children}
             </span>
         ),
 
-        highlight: ({ children }: { children: any }) => (
+        highlight: ({ children }: any) => (
             <span className="bg-yellow-300 dark:bg-yellow-500 text-black px-1 rounded">
                 {children}
             </span>
