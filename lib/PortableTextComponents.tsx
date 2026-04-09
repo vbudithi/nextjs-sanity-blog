@@ -3,21 +3,26 @@ import { urlFor } from "@/lib/sanity";
 import CodeBlock from "@/app/components/CodeBlock";
 
 export const portableTextComponents = {
-    // images
     types: {
         image: ({ value }: { value: any }) => (
             <figure className="my-12 flex flex-col items-center">
                 <div className="w-full max-w-xl">
-                    <Image
-                        src={urlFor(value).width(600).url()}
-                        alt={value.alt || "Blog image"}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto rounded-xl object-contain"
-                    />
+                    {value?.asset ? (
+                        <Image
+                            src={urlFor(value).width(600).url()}
+                            alt={value.alt || "Blog image"}
+                            width={600}
+                            height={400}
+                            className="w-full h-auto rounded-xl object-contain"
+                        />
+                    ) : (
+                        <div className="w-full h-64 bg-gray-200 flex items-center justify-center rounded-xl">
+                            <span className="text-gray-500">Image not available</span>
+                        </div>
+                    )}
                 </div>
 
-                {value.alt && (
+                {value?.alt && (
                     <figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 mt-3 max-w-2xl">
                         {value.alt}
                     </figcaption>
@@ -28,7 +33,6 @@ export const portableTextComponents = {
         code: ({ value }: { value: any }) => <CodeBlock value={value} />,
     },
 
-    //blocks
     block: {
         blockquote: ({ children }: any) => (
             <blockquote className="border-l-4 border-blue-500 pl-5 italic text-lg leading-relaxed text-gray-700 dark:text-gray-300 my-10 bg-gray-50 dark:bg-gray-900/40 py-4 rounded-r-md">
@@ -79,7 +83,6 @@ export const portableTextComponents = {
         ),
     },
 
-    // lists
     list: {
         bullet: ({ children }: any) => (
             <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-700 dark:text-gray-300 text-base md:text-lg">
@@ -95,16 +98,10 @@ export const portableTextComponents = {
     },
 
     listItem: {
-        bullet: ({ children }: any) => (
-            <li className="leading-relaxed">{children}</li>
-        ),
-
-        number: ({ children }: any) => (
-            <li className="leading-relaxed">{children}</li>
-        ),
+        bullet: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
+        number: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
     },
 
-    // marks
     marks: {
         strong: ({ children }: any) => (
             <strong className="font-semibold text-gray-900 dark:text-white">
@@ -114,9 +111,7 @@ export const portableTextComponents = {
 
         em: ({ children }: any) => <em className="italic">{children}</em>,
 
-        underline: ({ children }: any) => (
-            <span className="underline">{children}</span>
-        ),
+        underline: ({ children }: any) => <span className="underline">{children}</span>,
 
         code: ({ children }: any) => (
             <code className="text-sm px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200">
