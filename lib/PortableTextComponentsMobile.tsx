@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
-import CodeBlock from "@/app/components/CodeBlock";
+import CodeBlockMobile from "@/app/components/CodeBlockMobile";
 
 export const PortableTextComponentsMobile = {
     types: {
@@ -32,7 +32,7 @@ export const PortableTextComponentsMobile = {
             </figure>
         ),
 
-        code: ({ value }: any) => <CodeBlock value={value} />,
+        code: ({ value }: any) => <CodeBlockMobile value={value} />,
     },
 
     block: {

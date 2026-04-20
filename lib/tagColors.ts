@@ -7,6 +7,7 @@ export const tagColorMap: Record<string, string> = {
     "rag": "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-400",
     "ai agents": "bg-yellow-100 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-400",
     "ai security": "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400",
+    "mcp": "bg-teal-100 text-teal-700 dark:bg-teal-500/20 dark:text-teal-400",
 };
 
 const fallbackColors = [

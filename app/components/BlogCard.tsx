@@ -37,7 +37,7 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                         </div>
 
                         <div className="p-5">
-                            <h2 className="text-lg font-semibold line-clamp-1">
+                            <h2 className="text-lg font-semibold line-clamp-2">
                                 {post.title}
                             </h2>
 
@@ -51,7 +51,7 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                                 ))}
                             </div>
 
-                            <p className="text-sm mt-3 line-clamp-2 text-gray-600 dark:text-gray-300">
+                            <p className="text-sm mt-3 line-clamp-1 text-gray-600 dark:text-gray-300">
                                 {post.smallDescription}
                             </p>
                             <p className="text-xs mt-4 text-gray-500">
@@ -82,8 +82,6 @@ hover:bg-white/90 dark:hover:bg-black/70">
 
                 {/* BACK */}
                 <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden shadow-lg bg-black text-white p-5 flex flex-col justify-between">
-
-                    {/* BACK ICON */}
                     <button
                         onClick={(e) => {
                             e.preventDefault();
