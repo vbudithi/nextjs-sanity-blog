@@ -36,27 +36,30 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                             />
                         </div>
 
-                        <div className="p-5">
-                            <h2 className="text-lg font-semibold line-clamp-2">
+                        <div className="p-5 flex flex-col h-[200px]">
+                            <h2 className="text-lg font-semibold line-clamp-3">
                                 {post.title}
                             </h2>
+                            <div className="mt-auto">
 
-                            <div className="flex gap-2 mt-3">
-                                {post.tags?.slice(0, 2).map((tag) => (
-                                    <TagBadge
-                                        key={tag.slug.current}
-                                        label={tag.title}
-                                        href={`/tags/${tag.slug.current}`}
-                                    />
-                                ))}
+                                <div className="flex gap-2 mt-3">
+                                    {post.tags?.slice(0, 2).map((tag) => (
+                                        <TagBadge
+                                            key={tag.slug.current}
+                                            label={tag.title}
+                                            href={`/tags/${tag.slug.current}`}
+                                        />
+                                    ))}
+                                </div>
+
+
+                                {/* <p className="text-sm mt-3 line-clamp-1 text-gray-600 dark:text-gray-300">
+                                    {post.smallDescription}
+                                </p> */}
+                                <p className="text-xs mt-4 text-gray-500">
+                                    {formatDate(post?.publishedAt)}
+                                </p>
                             </div>
-
-                            <p className="text-sm mt-3 line-clamp-1 text-gray-600 dark:text-gray-300">
-                                {post.smallDescription}
-                            </p>
-                            <p className="text-xs mt-4 text-gray-500">
-                                {formatDate(post?.publishedAt)}
-                            </p>
                         </div>
                     </Link>
                     <button
