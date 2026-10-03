@@ -19,12 +19,9 @@ export default function BlogMobile({ post, plainText, readTime }: any) {
                 <ExploreButton />
             </div>
 
-            {/* Title */}
             <h1 className="text-2xl font-bold leading-tight mb-2">
                 {post.title}
             </h1>
-
-            {/* Date */}
             <p className="text-xs text-gray-400 mb-4">
                 {formatDate(post.publishedAt)}
             </p>
@@ -43,7 +40,6 @@ export default function BlogMobile({ post, plainText, readTime }: any) {
             {/* Read time */}
             <p className="text-gray-400 text-sm -mt-8">{readTime} min read</p>
 
-            {/* Image */}
             <div className="relative w-full aspect-video mb-8 max-w-4xl items-center justify-center mx-auto mt-4">
                 <Image
                     src={
@@ -56,18 +52,13 @@ export default function BlogMobile({ post, plainText, readTime }: any) {
                     className="rounded-xl object-cover  object-top shadow-md"
                 />
             </div>
-            {/* Description */}
             <p className="text-lg text-primary dark:text-gray-300">
                 {post?.smallDescription}
             </p>
-
-            {/* Content */}
             <PortableText
                 value={post?.content}
                 components={PortableTextComponentsMobile}
             />
-
-            {/* Comments */}
             <CommentSection
                 postId={post?._id}
                 comments={post?.comments}

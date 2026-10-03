@@ -31,7 +31,6 @@ export default function BlogReader({
 
     return (
         <>
-            {/* Listen Button */}
             <div className="flex gap-3 my-4">
                 {!isReading ? (
                     <button

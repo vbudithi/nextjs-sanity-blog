@@ -15,7 +15,7 @@ export default function BlogDesktop({ post, plainText, readTime }: any) {
 
     return (
         <>
-            <div className="max-w-5xl mx-auto -mt-15">
+            <div className="max-w-7xl mx-auto -mt-15">
                 <div className="flex items-center justify-between  ">
                     <div className="inline-block">
                         <BackButton />
@@ -65,7 +65,6 @@ export default function BlogDesktop({ post, plainText, readTime }: any) {
                     </div>
                 </div>
 
-                {/* Image */}
                 <div className="relative w-full aspect-video mb-8 max-w-4xl items-center justify-center mx-auto">
                     <Image
                         src={
@@ -79,19 +78,15 @@ export default function BlogDesktop({ post, plainText, readTime }: any) {
                     />
                 </div>
 
-                {/* Description */}
                 <p className="text-lg text-primary dark:text-gray-300">
                     {post?.smallDescription}
                 </p>
-                {/* Content */}
                 <div className="prose prose-invert max-w-none">
                     <PortableText
                         value={post?.content}
                         components={portableTextComponents}
                     />
                 </div>
-
-                {/* Comments */}
                 <CommentSection
                     postId={post?._id}
                     comments={post?.comments}
