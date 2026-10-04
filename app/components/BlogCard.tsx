@@ -6,6 +6,7 @@ import TagBadge from "@/app/components/TagBadge";
 import { Eye } from "lucide-react";
 import { simpleBlogCard } from "@/lib/interface";
 import { portableTextToPlainText } from "@/lib/portableTextToPlainText";
+import FavouriteToggle from "./FavouriteToggle";
 
 export default function BlogCard({ post, activeCard, setActiveCard }: { post: simpleBlogCard; activeCard: string | null; setActiveCard: (slug: string | null) => void }) {
     console.log("content:", portableTextToPlainText(post.content));
@@ -34,6 +35,7 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                                 fill
                                 className="object-cover object-top"
                             />
+                            <FavouriteToggle postId={post._id} />
                         </div>
 
                         <div className="p-5 flex flex-col h-[200px]">
@@ -91,8 +93,6 @@ hover:bg-white/90 dark:hover:bg-black/70">
                             e.stopPropagation();
                             setActiveCard(null);
                         }}
-
-
                         className="absolute top-3 right-3 z-10 bg-white/20 p-2 rounded-full cursor-pointer hover:bg-white/30 transition-all duration-200"
                     >
                         ✕
@@ -116,7 +116,6 @@ hover:bg-white/90 dark:hover:bg-black/70">
                                 .map((sentence, i) => (
                                     <li key={i}>• {sentence.trim()}</li>
                                 ))}
-                            {/* Fade overlay */}
                             <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
                         </ul>
                     </div>

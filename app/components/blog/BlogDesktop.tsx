@@ -90,7 +90,6 @@ export default function BlogDesktop({ post, plainText, readTime }: any) {
                 <CommentSection
                     postId={post?._id}
                     comments={post?.comments}
-                    createdAt={post?.createdAt}
                 />
             </div>
         </>

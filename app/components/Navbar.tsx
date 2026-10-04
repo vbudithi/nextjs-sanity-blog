@@ -121,6 +121,8 @@ export default function Navbar() {
                         </Link>
                         <Link href="/contact" onClick={() => setOpen(false)} className="text-base font-medium">Contact</Link>
 
+
+
                         <div className="flex justify-between items-center w-full mt-2">
                             {!user ? (
                                 <Link href="/auth/login" className="nav-link hover:underline underline-offset-4 border  ">

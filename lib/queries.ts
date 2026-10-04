@@ -1,5 +1,6 @@
 export const BLOG_QUERY = `
 *[_type == "blog"] | order(publishedAt desc){
+_id,
   title,
   smallDescription,
   "currentSlug": slug.current,

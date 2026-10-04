@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "VivByte",
@@ -26,6 +27,7 @@ export default function RootLayout({
           <Navbar />
           <main className="max-w-7xl mx-auto flex-1 pt-16 ">
             {children}
+            <Toaster position="top-center" />
           </main>
           <Footer />
         </ThemeProvider>

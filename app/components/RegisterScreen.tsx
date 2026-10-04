@@ -3,12 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, CheckCircle2, XCircle } from "lucide-react";
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from "@/lib/supabase/client";
 
 export default function RegisterScreen() {
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "");
-
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

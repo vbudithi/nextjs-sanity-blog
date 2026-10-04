@@ -1,4 +1,5 @@
 export interface simpleBlogCard {
+    _id: string;
     title: string,
     smallDescription: string,
     currentSlug: string,

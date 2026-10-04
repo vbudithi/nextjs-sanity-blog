@@ -62,7 +62,6 @@ export default function BlogMobile({ post, plainText, readTime }: any) {
             <CommentSection
                 postId={post?._id}
                 comments={post?.comments}
-                createdAt={post?.createdAt}
             />
         </div>
     );
