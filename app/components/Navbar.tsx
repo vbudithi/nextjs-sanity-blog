@@ -8,6 +8,7 @@ import { ModeToggle } from "./ModeToggle";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase/client";
 import { usePathname } from "next/dist/client/components/navigation";
+import { Bookmark } from "lucide-react";
 
 
 export default function Navbar() {
@@ -74,13 +75,44 @@ export default function Navbar() {
                             </Button>
                         </Link>
                     ) : (
+                        <>
+
+                                 {/* Favourites - only visible when logged in */}
+    
+<Link
+    href="/favourites"
+    className={`group flex items-center gap-1.5 px-2.5 py-1.5 rounded-md
+        text-sm font-medium transition-all duration-200
+        ${
+            pathname === "/favourites"
+                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                : "text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-green-700 dark:hover:bg-green-900/20 dark:hover:text-green-400"
+        }`}
+>
+    <Bookmark
+        className={`w-4 h-4 transition-transform duration-200
+            group-hover:scale-110
+            ${
+                pathname === "/favourites"
+                    ? "fill-current"
+                    : ""
+            }`}
+    />
+
+    <span>Favourites</span>
+</Link>
+
+                                 {/* Signout - only visible when logged in */}
+                
                         <button
                             onClick={handleSignOut}
                             className="text-sm font-medium bg-red-600 text-white dark:bg-red-500 px-4 py-1.5 rounded-md hover:bg-red-700 dark:hover:bg-red-400 transition-colors cursor-pointer"
                         >
                             Sign Out
                         </button>
+                        </>
                     )}
+                    
                     <ModeToggle />
                 </div>
 
@@ -120,9 +152,6 @@ export default function Navbar() {
                             Byte News ↗
                         </Link>
                         <Link href="/contact" onClick={() => setOpen(false)} className="text-base font-medium">Contact</Link>
-
-
-
                         <div className="flex justify-between items-center w-full mt-2">
                             {!user ? (
                                 <Link href="/auth/login" className="nav-link hover:underline underline-offset-4 border  ">
@@ -131,6 +160,28 @@ export default function Navbar() {
                                     </Button>
                                 </Link>
                             ) : (
+                                <>
+
+                                 {/* Favourites - only visible when logged in */}
+   <Link
+    href="/favourites"
+    className={`group flex items-center gap-1.5 px-2.5 py-1.5 rounded-md
+        text-sm font-medium transition-all duration-200
+        ${
+            pathname === "/favourites"
+                ? "bg-amber-100 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400"
+                : "text-amber-500 hover:bg-amber-50 hover:text-amber-600 dark:text-amber-400 dark:hover:bg-amber-900/20"
+        }`}
+>
+    <Bookmark
+        className={`w-4 h-4 transition-transform duration-200
+            group-hover:scale-110
+            ${pathname === "/favourites" ? "fill-current" : ""}`}
+    />
+
+    <span>Favourites</span>
+</Link>
+                        {/*  Signout */}
                                 <button
                                     onClick={() => {
                                         handleSignOut();
@@ -140,6 +191,7 @@ export default function Navbar() {
                                 >
                                     Sign Out
                                 </button>
+                                </>
                             )}
 
                             <div onClick={() => setOpen(false)}>

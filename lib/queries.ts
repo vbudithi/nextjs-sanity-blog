@@ -14,7 +14,6 @@ _id,
 }
 `;
 
-
 export const BLOG_BY_SLUG_QUERY = `
 *[_type == "blog" && slug.current == $slug][0]{
   _id,
@@ -39,3 +38,23 @@ export const BLOG_BY_SLUG_QUERY = `
   }
 }
 `;
+
+// Fetches blog posts saved by the currently logged-in user as favourites
+export const BLOG_BY_IDS_QUERY = `
+            *[
+                _type == "blog" &&
+                _id in $postIds
+            ] | order(publishedAt desc) {
+                _id,
+                title,
+                smallDescription,
+                "currentSlug": slug.current,
+                titleImage,
+                content,
+                publishedAt,
+                "tags": tags[]->{
+                    title,
+                    slug
+                }
+            }
+        `;

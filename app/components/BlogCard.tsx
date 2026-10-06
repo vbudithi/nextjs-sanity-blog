@@ -8,7 +8,7 @@ import { simpleBlogCard } from "@/lib/interface";
 import { portableTextToPlainText } from "@/lib/portableTextToPlainText";
 import FavouriteToggle from "./FavouriteToggle";
 
-export default function BlogCard({ post, activeCard, setActiveCard }: { post: simpleBlogCard; activeCard: string | null; setActiveCard: (slug: string | null) => void }) {
+export default function BlogCard({ post, activeCard, setActiveCard, onUnfavourite}: { post: simpleBlogCard; activeCard: string | null; setActiveCard: (slug: string | null) => void ; onUnfavourite?: (postId: string) => void;}){
     console.log("content:", portableTextToPlainText(post.content));
     const flipped = activeCard === post.currentSlug;
 
@@ -35,7 +35,8 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                                 fill
                                 className="object-cover object-top"
                             />
-                            <FavouriteToggle postId={post._id} />
+                            <FavouriteToggle postId={post._id} 
+                            onUnfavourite={onUnfavourite}/>
                         </div>
 
                         <div className="p-5 flex flex-col h-[200px]">
@@ -54,7 +55,6 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                                     ))}
                                 </div>
 
-
                                 {/* <p className="text-sm mt-3 line-clamp-1 text-gray-600 dark:text-gray-300">
                                     {post.smallDescription}
                                 </p> */}
@@ -71,15 +71,15 @@ export default function BlogCard({ post, activeCard, setActiveCard }: { post: si
                             e.stopPropagation();
                             setActiveCard(post.currentSlug);
                         }}
-                        className="absolute bottom-2 right-2 flex items-center gap-1 text-xs 
-text-gray-500 cursor-pointer hover:text-gray-700 
-dark:text-gray-300 transition-colors duration-200
+                                                className="absolute bottom-2 right-2 flex items-center gap-1 text-xs 
+                        text-gray-500 cursor-pointer hover:text-gray-700 
+                        dark:text-gray-300 transition-colors duration-200
 
-bg-white/70 dark:bg-black/50 
-backdrop-blur-md border border-black/10 dark:border-white/10 
-px-2 py-1 rounded-full hover:scale-110 
-hover:bg-white/90 dark:hover:bg-black/70">
-                        <Eye className="w-3 h-3" />
+                        bg-white/70 dark:bg-black/50 
+                        backdrop-blur-md border border-black/10 dark:border-white/10 
+                        px-2 py-1 rounded-full hover:scale-110 
+                        hover:bg-white/90 dark:hover:bg-black/70">
+                                                <Eye className="w-3 h-3" />
                         <span>Quick View</span>
 
                     </button>

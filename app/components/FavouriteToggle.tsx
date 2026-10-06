@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 
 interface FavouriteToggleProps {
     postId: string;
+     onUnfavourite?: (postId: string) => void;
 }
 
-export default function FavouriteToggle({ postId }: FavouriteToggleProps) {
+export default function FavouriteToggle({ postId , onUnfavourite}: FavouriteToggleProps) {
     const router = useRouter();
     const [isFavourite, setIsFavourite] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -26,6 +27,10 @@ export default function FavouriteToggle({ postId }: FavouriteToggleProps) {
                     .eq('user_id', user.id)
                     .eq('post_id', postId);
                 setIsFavourite(!!data?.length);
+                 if (error) {
+                    console.error("Error loading favourites:", error);
+                    return;
+                }
             } catch (error) {
                 console.error("Error fetching favourites:", error);
             }
@@ -76,6 +81,7 @@ export default function FavouriteToggle({ postId }: FavouriteToggleProps) {
 
                 setIsFavourite(false);
 
+    onUnfavourite?.(postId);
                 toast.success("Removed from favourites");
             }
 
