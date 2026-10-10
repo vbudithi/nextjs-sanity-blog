@@ -15,7 +15,7 @@ export default function BlogCard({ post, activeCard, setActiveCard, onUnfavourit
     const href = `/blog/${post?.currentSlug}`;
 
     return (
-        <div className="w-[300px] h-[360px] perspective ">
+        <div className="w-[350px] h-[360px] perspective ">
             <div
                 className={`relative w-full h-full transition-transform duration-500 
         [transform-style:preserve-3d] ${flipped ? "rotate-y-180" : ""}`}

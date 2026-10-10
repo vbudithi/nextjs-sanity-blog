@@ -58,3 +58,21 @@ export const BLOG_BY_IDS_QUERY = `
                 }
             }
         `;
+
+export const OPEN_SOURCE_PROJECTS_QUERY = `
+  *[_type == "openSourceProject"]
+  | order(featured desc, name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    description,
+    image,
+    githubUrl,
+    technologies,
+    featured,
+    "tags": tags[]->{
+      title,
+      slug
+    }
+  }
+`;

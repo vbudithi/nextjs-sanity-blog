@@ -1,6 +1,6 @@
 export const tagColorMap: Record<string, string> = {
-    "ai": "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400",
-    "ai hardware": "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300",
+    "open source ai": "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400",
+    "ai experiments": "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300",
     "ai automation": "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400",
     "local ai": "bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400",
     "multimodal": "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400",

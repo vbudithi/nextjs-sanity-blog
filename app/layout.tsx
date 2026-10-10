@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
@@ -25,10 +26,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="max-w-7xl mx-auto flex-1 pt-16 ">
+
+          <main className="w-full max-w-[1800px] mx-auto flex-1 pt-16 px-6 xl:px-10 2xl:px-12">
             {children}
             <Toaster position="top-center" />
           </main>
+
           <Footer />
         </ThemeProvider>
       </body>

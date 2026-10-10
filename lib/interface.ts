@@ -18,3 +18,14 @@ export interface simpleBlogCard {
         };
     }[];
 }
+
+export interface OpenSourceProject {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image?: any;
+  githubUrl: string;
+  technologies?: string[];
+  featured?: boolean;
+}
