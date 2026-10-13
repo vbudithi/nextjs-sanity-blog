@@ -88,7 +88,8 @@ export default function RegisterScreen() {
         }
     };
     return (
-        <main className="min-h-screen">
+       <main className="flex min-h-0 items-center justify-center px-4 py-4">
+         <div className="w-full max-w-md">
             <div className="text-center mb-8">
                 <Link
                     href="/"
@@ -100,7 +101,7 @@ export default function RegisterScreen() {
                 </Link>
 
                 <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                    Join VivByte to stay updated with the latest news and updates about AI.
+                    Join VivByte to stay updated with the latest articles and Open Source expirements and updates about AI.
                 </p>
             </div>
 
@@ -112,7 +113,7 @@ export default function RegisterScreen() {
                     </h2>
 
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Let’s get you started.
+                        Learn AI, build projects, and grow your skills
                     </p>
                 </div>
 
@@ -353,6 +354,7 @@ export default function RegisterScreen() {
                     </Link>
                 </div>
             </div>
+        </div>
         </main>
     );
 }

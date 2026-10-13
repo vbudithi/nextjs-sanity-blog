@@ -14,6 +14,30 @@ _id,
 }
 `;
 
+export const BLOG_PAGINATED_QUERY = `
+  *[
+    _type == "blog" &&
+    (
+      $tag == "" ||
+      count(tags[lower(@->title) == lower($tag)]) > 0
+    )
+  ]
+  | order(publishedAt desc, _id asc) [$start...$end] {
+    _id,
+    title,
+    smallDescription,
+    "currentSlug": slug.current,
+    titleImage,
+    content,
+    publishedAt,
+    "tags": tags[]->{
+      title,
+      slug
+    }
+  }
+`;
+
+
 export const BLOG_BY_SLUG_QUERY = `
 *[_type == "blog" && slug.current == $slug][0]{
   _id,
@@ -74,5 +98,12 @@ export const OPEN_SOURCE_PROJECTS_QUERY = `
       title,
       slug
     }
+  }
+`;
+
+
+export const BLOG_TAGS_QUERY = `
+  *[_type == "blog"].tags[]->{
+    title
   }
 `;

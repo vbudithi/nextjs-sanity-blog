@@ -1,15 +1,15 @@
-
 import { sanityClient } from "@/lib/sanity";
 import { simpleBlogCard } from "@/lib/interface";
-import { BLOG_QUERY } from "@/lib/queries";
+import {
+  BLOG_PAGINATED_QUERY,
+  BLOG_TAGS_QUERY,
+} from "@/lib/queries";
 import TagFilter from "./components/TagFilter";
 import BlogGrid from "./components/BlogGrid";
 import OpenSourceProjectGrid from "./components/OpenSourceProjectGrid";
 import { Github, Newspaper } from "lucide-react";
 
-async function getBlogs(): Promise<simpleBlogCard[]> {
-  return await sanityClient.fetch(BLOG_QUERY);
-}
+const PAGE_SIZE = 6;
 
 const MAIN_TAGS = [
   "open source ai",
@@ -22,6 +22,20 @@ const MAIN_TAGS = [
   "local ai",
   "llm",
 ];
+function normalizeTag(tag: string | undefined): string | undefined {
+  return tag?.trim().toLowerCase().replace(/-/g, " ");
+}
+
+async function fetchPaginatedBlogs(
+  start: number,
+  end: number,
+  tag: string
+): Promise<simpleBlogCard[]> {
+  return sanityClient.fetch(
+    BLOG_PAGINATED_QUERY,
+    { start, end, tag } as Record<string, string | number>
+  );
+}
 
 export default async function Home({
   searchParams,
@@ -29,71 +43,65 @@ export default async function Home({
   searchParams?: Promise<{ tag?: string }>;
 }) {
   const params = await searchParams;
-  const data = await getBlogs();
-
-  const activeTag = params?.tag
-    ? decodeURIComponent(params.tag).trim().toLowerCase()
-    : undefined;
-
-  // Keep navigation tags even when no blog uses them.
-  const allTags = Array.from(
-    new Set([
-      ...MAIN_TAGS,
-      ...data.flatMap(
-        (post) =>
-          post.tags?.map((tag: any) =>
-            tag.title.trim().toLowerCase()
-          ) || []
-      ),
-    ])
-  );
-
-  // Normalize hyphens and spaces for reliable matching.
-  const normalizedTag = activeTag?.replace(/-/g, " ");
+  const activeTag = normalizeTag(params?.tag);
 
   const isOpenSourceTag =
-    normalizedTag === "open source ai" ||
-    normalizedTag === "open source projects";
+    activeTag === "open source ai" ||
+    activeTag === "open source projects";
 
-  // Filter blog posts only for regular article tags.
-  const filteredPosts = normalizedTag
-    ? data.filter((post) =>
-        post.tags?.some(
-          (tag: any) =>
-            tag.title.trim().toLowerCase() === normalizedTag
-        )
-      )
-    : data;
+  const [initialBatch, tagData] = await Promise.all([
+    fetchPaginatedBlogs(
+      0,
+      PAGE_SIZE + 1,
+      activeTag && !isOpenSourceTag ? activeTag : ""
+    ),
+    sanityClient.fetch(BLOG_TAGS_QUERY),
+  ]);
+
+  const posts = initialBatch.slice(0, PAGE_SIZE);
+  const hasMore = initialBatch.length > PAGE_SIZE;
+
+const normalizedTagData: string[] = (
+  tagData as { title: string }[]
+)
+  .map((item: { title: string }) => normalizeTag(item.title))
+  .filter((value: string | undefined): value is string => Boolean(value));
+
+const allTags: string[] = Array.from(
+  new Set<string>([...MAIN_TAGS, ...normalizedTagData])
+);
 
   return (
     <div className="mx-auto max-w-7xl px-4">
-      {/* Permanent navigation tags */}
       <TagFilter tags={allTags} />
 
-      {/* Homepage: projects and latest articles */}
       {!activeTag ? (
         <>
           <section className="mt-12">
-           <h2 className="mb-6 text-2xl font-bold">
-  <span className="inline-flex items-center gap-2">
-    <Github size={26} className="shrink-0" />
-    <span>Open Source GitHub</span>
-  </span>
-</h2>
+            <h2 className="mb-6 text-2xl font-bold">
+              <span className="inline-flex items-center gap-2">
+                <Github size={26} className="shrink-0" />
+                <span>Open Source GitHub</span>
+              </span>
+            </h2>
 
             <OpenSourceProjectGrid />
           </section>
 
           <section className="mt-12">
-           <h2 className="mb-6 text-2xl font-bold">
-  <span className="inline-flex items-center gap-2">
-    <Newspaper size={26} className="shrink-0" />
-    <span>Latest Articles</span>
-  </span>
-</h2>
+            <h2 className="mb-6 text-2xl font-bold">
+              <span className="inline-flex items-center gap-2">
+                <Newspaper size={26} className="shrink-0" />
+                <span>Latest Articles</span>
+              </span>
+            </h2>
 
-            {data.length > 0 ? (
-              <BlogGrid posts={data} />
+            {posts.length > 0 ? (
+              <BlogGrid
+                key="latest"
+                posts={posts}
+                initialHasMore={hasMore}
+              />
             ) : (
               <p className="py-10 text-center text-gray-500">
                 No articles published yet.
@@ -102,21 +110,32 @@ export default async function Home({
           </section>
         </>
       ) : isOpenSourceTag ? (
-        /* Open Source AI does not depend on blog posts */
         <section className="mt-12">
-          <h2 className="mb-6 text-2xl font-bold">
-            Open Source GitHub
-          </h2>
+         <h2 className="mb-6 w-full text-center text-2xl font-bold">
+  <span className="inline-flex items-center justify-center gap-2">
+    <Github size={26} className="shrink-0" />
+    <span>Open Source GitHub</span>
+  </span>
+</h2>
 
           <OpenSourceProjectGrid />
         </section>
-      ) : filteredPosts.length > 0 ? (
-        /* Other tags show matching blog articles */
-        <BlogGrid posts={filteredPosts} />
+      ) : posts.length > 0 ? (
+        <section className="mt-12">
+          <h2 className="mb-6 text-2xl font-bold text-center justify-center">
+            {activeTag}
+          </h2>
+
+          <BlogGrid
+            key={activeTag}
+            posts={posts}
+            initialHasMore={hasMore}
+            tag={activeTag}
+          />
+        </section>
       ) : (
-        /* Selected tag exists, but has no articles */
         <p className="py-12 text-center text-gray-500">
-          No articles found.
+          No articles found for this tag.
         </p>
       )}
     </div>

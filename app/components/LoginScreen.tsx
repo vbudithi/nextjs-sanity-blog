@@ -47,7 +47,8 @@ export default function LoginScreen() {
     };
 
     return (
-        <main className="min-h-screen">
+        <main className="flex min-h-0 items-center justify-center px-4 py-4">
+          <div className="w-full max-w-md">
             <div className="text-center mb-8">
                 <Link
                     href="/"
@@ -61,7 +62,7 @@ export default function LoginScreen() {
                     Learn AI, Build Projects, and Share Knowledge with the World.
                 </p>
             </div>
-            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm p-8 sm:p-10">
+           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-8">
                 <div className="mb-6 text-center">
                     <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
                         Welcome Human!
@@ -179,6 +180,7 @@ export default function LoginScreen() {
                     </Link>
                 </div>
             </div >
+            </div>
         </main >
     );
 }
